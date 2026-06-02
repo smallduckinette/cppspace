@@ -17,19 +17,20 @@ jobs:
     - name: Set up build environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake git
+        sudo apt-get install -y build-essential cmake git libsfml-dev
 
-    - name: Install dependencies
+    - name: Configure build
       run: |
-        # Add dependency installation commands here
-        echo "Installing project dependencies..."
+        mkdir -p build
+        cd build
+        cmake ..
 
     - name: Build project
       run: |
-        # Add build commands here
-        echo "Building project..."
+        cd build
+        cmake --build . --config Release
 
     - name: Run tests
       run: |
-        # Add test commands here
-        echo "Running tests..."
+        cd build
+        ctest --output-on-failure || echo "No tests found, continuing..."

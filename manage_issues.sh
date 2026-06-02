@@ -55,7 +55,11 @@ process_issue() {
     echo "Lancement de Vibe pour implémenter la feature..."
     echo "Description de l'issue:"
     echo "$issue_body"
-    vibe --prompt "Implement the feature for issue #$issue_number: $issue_title. Description: $issue_body" --agent auto-approve --trust
+    
+    # Charger les conventions pour le mode headless
+    local conventions=$(cat vibe_conventions.md)
+    
+    vibe --prompt "Implement the feature for issue #$issue_number: $issue_title. Description: $issue_body. Make sure the implementation is complete and addresses all requirements. Test thoroughly and ensure no regressions. CONVENTIONS: $conventions" --agent auto-approve --trust
     
     # Commit les changements faits par Vibe
     git add .
@@ -95,7 +99,11 @@ update_pr() {
     echo "Lancement de Vibe pour traiter les commentaires..."
     echo "Commentaires:"
     echo "$comments"
-    vibe --prompt "Address PR feedback for PR #$pr_number: $pr_title. Comments: $comments" --agent auto-approve --trust
+    
+    # Charger les conventions pour le mode headless
+    local conventions=$(cat vibe_conventions.md)
+    
+    vibe --prompt "Address PR feedback for PR #$pr_number: $pr_title. Comments: $comments. Make sure all feedback is addressed completely. Test thoroughly and ensure no regressions. CONVENTIONS: $conventions" --agent auto-approve --trust
     
     # Commit les changements faits par Vibe
     git add .
