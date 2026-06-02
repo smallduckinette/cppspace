@@ -1,0 +1,35 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up build environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake git
+
+    - name: Install dependencies
+      run: |
+        # Add dependency installation commands here
+        echo "Installing project dependencies..."
+
+    - name: Build project
+      run: |
+        # Add build commands here
+        echo "Building project..."
+
+    - name: Run tests
+      run: |
+        # Add test commands here
+        echo "Running tests..."
